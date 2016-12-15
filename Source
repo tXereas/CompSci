@@ -19,11 +19,14 @@ public class Regex {
 
 	}
 	
-	public static void log( String loggg ) {
+	public static String log( String loggg ) {
+    String ans = "";
 	Pattern pat = Pattern.compile("Log [0-9]+:\\s*(.*)");
 	Matcher mat = pat.matcher( loggg );
-	if (mat.find()) System.out.println(mat.group(1));
+	if (mat.find()) ans+=mat.group(1);
+	return ans;
 	}
+    
 	
 	public static boolean isBinary( String check ) {
 		Pattern pat = Pattern.compile("[^10]");
@@ -57,7 +60,7 @@ public class Regex {
 		Scanner scan = new Scanner(fileName);
 		while (scan.hasNextLine()) {
 			String temp = scan.nextLine();
-			if (temp.matches("[0-2][0-5]+[0-5]+.[0-2][0-5]+[0-5].[0-2][0-5]+[0-5].[0-2][0-5]+[0-5]")) ip.add(temp); 
+			if (temp.matches( "(([0-2][0-5]{0,2}|1[0-9]{0,2})\\.?){4}" ) ) ip.add(temp); 
 		}
 		scan.close();
 		}
