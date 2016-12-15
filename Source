@@ -1,0 +1,72 @@
+
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Regex {
+
+	public static void main(String[] args) {
+		List <String> strings = new ArrayList<String>();
+		strings.add("d_asASD_");
+		strings.add("D_asASD_");
+		strings.add("d_asA-SD_");
+		strings.add("1");
+		convention(strings);
+		
+
+	}
+	
+	public static void log( String loggg ) {
+	Pattern pat = Pattern.compile("Log [0-9]+:\\s*(.*)");
+	Matcher mat = pat.matcher( loggg );
+	if (mat.find()) System.out.println(mat.group(1));
+	}
+	
+	public static boolean isBinary( String check ) {
+		Pattern pat = Pattern.compile("[^10]");
+		Matcher mat = pat.matcher(check);
+		if (mat.find()) return false;
+		return true;
+	}
+	
+	public static boolean isHex( String check ) {
+		Pattern pat = Pattern.compile("[^0-9A-F]");
+		Matcher mat = pat.matcher(check);
+		if (mat.find()) return false;
+		return true;
+	}
+
+	public static String[] combine( String check ) {
+		//System.out.println(Arrays.toString(check.split(":")));
+		return check.split(":");
+	}
+        
+	public static void convention( List <String> strings ) {
+		for ( int i = strings.size()-1; i >= 0; i--) {
+			if (!strings.get(i).matches("([a-z_]\\w*)")) strings.remove(i);
+		}
+		System.out.println(strings.toString());
+	}
+	
+	public void findIP( String fileName ) throws FileNotFoundException {
+		List <String> ip = new ArrayList<String>();
+		try {
+		Scanner scan = new Scanner(fileName);
+		while (scan.hasNextLine()) {
+			String temp = scan.nextLine();
+			if (temp.matches("[0-2][0-5]+[0-5]+.[0-2][0-5]+[0-5].[0-2][0-5]+[0-5].[0-2][0-5]+[0-5]")) ip.add(temp); 
+		}
+		scan.close();
+		}
+		catch (Exception e) {
+			throw new FileNotFoundException();
+		}
+	}
+	
+	
+	
+	
+}
