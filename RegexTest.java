@@ -1,5 +1,8 @@
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
 public class RegexTest {
@@ -19,6 +22,23 @@ public class RegexTest {
 	@Test
 	public void logCheck() {
 		assertEquals(Regex.log("Log 82334: I am now correct"), "I am now correct");
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Test
+	public void combine() {
+		String [] strings = {"I", "DO", "NOT", "WANT", "TO", "DO", "THIS"};
+	    assertEquals(Regex.combine("I:DO:NOT:WANT:TO:DO:THIS"), strings );
+	}
+	
+	@Test
+	public void convention() {
+		List <String> strings = new ArrayList<String>();
+		strings.add("_fjsdfHF");
+		strings.add("234kjsdfH");
+		strings.add("Fhshf");
+		Regex.convention(strings);
+		assertEquals( strings.size(), 1);
 	}
 	
 	
